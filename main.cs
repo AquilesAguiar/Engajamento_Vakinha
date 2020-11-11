@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+
+class MainClass {
+  public static void Main (string[] args) {
+   
+    User novoUsuario = new User("AQ","joão@123.com",1234,2000);
+    Projeto novoProjeto = new Projeto("Cinemaa4d", "Batman V Superman","Cinema",0);
+
+    List<Projeto> listaProjetos = new List<Projeto>();
+    List<User> listaUsuarios = new List<User>();
+
+    Console.WriteLine("Bem Vindo ao site de Crowdfunding");
+
+    //Var
+    string NomeU,Email,Titulo,Descricao,Area,decis = "S";
+    int Senha,escolha,Likes,votar;
+    double Meta;
+    
+    while(decis == "S"){
+      Console.Write("Digite 1 - Para criar Um novo Projeto\nDigite 2 - Pava votar em algum Projeto \n>>");
+      escolha = int.Parse(Console.ReadLine());
+
+      if (escolha == 1){
+        Console.Write("Insira o Nome de Usuario >>");
+        NomeU = Console.ReadLine();
+
+        Console.Write("Insira Seu Email >>");
+        Email= Console.ReadLine();
+
+        Console.Write("Insira sua Senha >>");
+        Senha = int.Parse(Console.ReadLine());
+
+        /* Projeto */
+
+        Console.Write("Insira o Titulo do projeto >>");
+        Titulo = Console.ReadLine();
+
+        Console.Write("Insira a Descrição do Projeto >>");
+        Descricao= Console.ReadLine();
+
+        Console.Write("Insira a Area do Projeto >>");
+        Area = Console.ReadLine();
+
+        Console.Write("Insira a Meta desejada  >>");
+        Meta = double.Parse(Console.ReadLine());
+
+        novoUsuario = new User(NomeU,Email,Senha,Meta);
+        listaUsuarios.Add(novoUsuario);
+
+        novoProjeto = new Projeto(Titulo,Descricao,Area,0);
+        listaProjetos.Add(novoProjeto);
+
+      }
+
+      /*Votar*/
+      if(escolha == 2){
+        for(int x = 0;x < listaProjetos.Count;x++){
+          Console.WriteLine($"Dono do Projeto >> {listaUsuarios[x].Nome}\nNome Do Projeto >>{listaProjetos[x].NomeProjeto}\nMeta do Projeto >> {listaUsuarios[x].ValorEsp}\nDescrição do Projeto >> {listaProjetos[x].Descricao}\nArea de Atuação do Projeto >>  {listaProjetos[x].Utilizacao}\nQuantidade de Votos >> {listaProjetos[x].Votos}");
+
+          Console.Write("Deseja dar Like ? 1 - Sim/2 - Não >>");
+          votar = int.Parse(Console.ReadLine());
+
+          if (votar == 1){
+            Console.WriteLine("Voto Contabilizado com Sucesso");
+            listaProjetos[x].Votos+=1;
+            Console.WriteLine("Quantidade de Votos >>",listaProjetos[x].Votos);
+          }
+         
+        }
+      }
+
+    }
+      
+  }
+}
