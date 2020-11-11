@@ -74,12 +74,11 @@ uma votação aberta é realizada ao publico do site,o projeto mais votado receb
 
           if (votar == 1){
             Console.WriteLine("Voto Contabilizado com Sucesso");
+            Console.ReadLine();
             listaProjetos[x].Votos+=1;
-            Console.WriteLine("Quantidade de Votos >>",listaProjetos[x].Votos);
-            
             contVotos+=1;
           }
-         
+          Console.Clear();
         }
 
         Console.Write("Mais Pessoas Iram votar ? S - Sim // N-Não >>");
