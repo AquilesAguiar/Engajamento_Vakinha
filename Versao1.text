@@ -13,25 +13,15 @@ class MainClass {
     Console.WriteLine("Bem Vindo ao site de Crowdfunding");
 
     //Var
-    string NomeU,Email,Titulo,Descricao,Area,decis = "S",Pessoas="S";
-    int Senha,escolha,Likes,votar,contVotos;
+    string NomeU,Email,Titulo,Descricao,Area,decis = "S";
+    int Senha,escolha,Likes,votar;
     double Meta;
     
-    Console.WriteLine(@"O site Funciona com um sistema de sprints,onde o
-Patrocianador irá permitir um numero X de Projetos,a serem cadstrados na sprint,após o cadastro dos projetos,
-uma votação aberta é realizada ao publico do site,o projeto mais votado recebe um Patrocinio para seu Projeto");
-    Console.ReadLine();
-
-    while (decis == "S"){
-
-      contVotos = 0;
-      
-      Console.Write("Patrocianador Insira a quantidade de Projetos a serem cadstrados >> ");
-
+    while(decis == "S"){
+      Console.Write("Digite 1 - Para criar Um novo Projeto\nDigite 2 - Pava votar em algum Projeto \n>>");
       escolha = int.Parse(Console.ReadLine());
-      
-      //cadastro
-      for (int x = 0; x < escolha;x++){
+
+      if (escolha == 1){
         Console.Write("Insira o Nome de Usuario >>");
         NomeU = Console.ReadLine();
 
@@ -55,8 +45,6 @@ uma votação aberta é realizada ao publico do site,o projeto mais votado receb
         Console.Write("Insira a Meta desejada  >>");
         Meta = double.Parse(Console.ReadLine());
 
-        Console.ReadLine();
-
         novoUsuario = new User(NomeU,Email,Senha,Meta);
         listaUsuarios.Add(novoUsuario);
 
@@ -64,8 +52,9 @@ uma votação aberta é realizada ao publico do site,o projeto mais votado receb
         listaProjetos.Add(novoProjeto);
 
       }
-      while (Pessoas == "S"){
-        Console.Clear();
+
+      /*Votar*/
+      if(escolha == 2){
         for(int x = 0;x < listaProjetos.Count;x++){
           Console.WriteLine($"Dono do Projeto >> {listaUsuarios[x].Nome}\nNome Do Projeto >>{listaProjetos[x].NomeProjeto}\nMeta do Projeto >> {listaUsuarios[x].ValorEsp}\nDescrição do Projeto >> {listaProjetos[x].Descricao}\nArea de Atuação do Projeto >>  {listaProjetos[x].Utilizacao}\nQuantidade de Votos >> {listaProjetos[x].Votos}");
 
@@ -76,35 +65,13 @@ uma votação aberta é realizada ao publico do site,o projeto mais votado receb
             Console.WriteLine("Voto Contabilizado com Sucesso");
             listaProjetos[x].Votos+=1;
             Console.WriteLine("Quantidade de Votos >>",listaProjetos[x].Votos);
-            
-            contVotos+=1;
           }
          
         }
-
-        Console.Write("Mais Pessoas Iram votar ? S - Sim // N-Não >>");
-        Pessoas = Console.ReadLine();
       }
 
-      int Maior = listaProjetos[0].Votos;
-      int indiceVencedor = 0;
-
-      for (int x = 0;x < escolha;x++ ){
-        if (listaProjetos[x].Votos > Maior){
-          Maior = listaProjetos[x].Votos;
-          indiceVencedor = x;
-        }
-      }
-       Console.WriteLine(@"                  Projeto Vencedor");
-
-       Console.WriteLine($"Dono do Projeto >> {listaUsuarios[indiceVencedor].Nome}\nNome Do Projeto >>{listaProjetos[indiceVencedor].NomeProjeto}\nMeta do Projeto >> {listaUsuarios[indiceVencedor].ValorEsp}\nDescrição do Projeto >> {listaProjetos[indiceVencedor].Descricao}\nArea de Atuação do Projeto >>  {listaProjetos[indiceVencedor].Utilizacao}\nQuantidade de Votos >> {listaProjetos[indiceVencedor].Votos}");
-
-      double valorPatrocinio = ((listaProjetos[indiceVencedor].Votos/contVotos)^2)*30000;
-
-       Console.WriteLine($"Valor de Patrocinio >> {valorPatrocinio}");
       
-      Console.Write("Realizar Novo Patrocinio ? S - Sim // N-Não >>");
-      decis = Console.ReadLine();
+
     }
       
   }

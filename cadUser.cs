@@ -11,10 +11,11 @@ class User{
 
   public double ValorEsp {get{return Meta;} set{Meta = value;}}
 
-  public User (string N, string Em,int Pass,double Meta){
+  public User (string N, string Em,int Pass,double valor){
     nome = N;
     email = Em;
-    Senha = Pass;
+    senha = Pass;
+    Meta = valor;
 
   }
 }
